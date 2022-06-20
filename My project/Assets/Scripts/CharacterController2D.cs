@@ -15,6 +15,11 @@ public class CharacterController2D : MonoBehaviour
     public float bulletForce = 5f;
     public float moveSpeed = 5f;
 
+    public int life;
+    public int money; 
+    public float attackSpeed;
+    public float dmg;
+
     void Start()
     {
         bulletParent = GameObject.Find("Trash");
@@ -30,6 +35,7 @@ public class CharacterController2D : MonoBehaviour
             direction = cam.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
             GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position,Quaternion.identity, bulletParent.transform);
             bullet.GetComponent<Rigidbody2D>().AddForce(direction.normalized * bulletForce);
+            bullet.GetComponent<Bullet>().parent = this.gameObject;
         }
     }
     void FixedUpdate()

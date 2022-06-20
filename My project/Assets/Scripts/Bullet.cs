@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     public int type;
 
+    public GameObject parent;
+
     private Vector2 screenBounds;
 
     // Start is called before the first frame update

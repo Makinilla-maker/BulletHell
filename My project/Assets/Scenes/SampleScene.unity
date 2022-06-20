@@ -123,6 +123,70 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &569456959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 569456961}
+  - component: {fileID: 569456960}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &569456960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569456959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b83c84a4e4c21449b7db3784e6effa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy:
+  - name: Basic
+    prefabPath: {fileID: 7596215664535288965, guid: 0d04d3e00e4a35a418a6eb843995deb3, type: 3}
+    type: 0
+    lives: 30
+    xp: 0
+    gold: 0
+  - name: Tank
+    prefabPath: {fileID: 8005408865831872949, guid: 664904b9ad9da6348bc1473177a76aa0, type: 3}
+    type: 1
+    lives: 5
+    xp: 0
+    gold: 0
+  enemies: []
+  place: {x: 0, y: 0, z: 0}
+  levelManger: {fileID: 1457882592}
+  delayEnemy: 5
+  timeBetween: 0
+  percentBasicEnemy: 10
+  percentTankEnemy: 90
+--- !u!4 &569456961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569456959}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.8418145, y: 0.4485891, z: 23.06511}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +220,7 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.43867922, b: 0.43867922, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -346,19 +410,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95565c32f772aa645b8e034f3a0b0b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  step: 0
   timer: 0
-  delayEnemy: 2
-  timeBetween: 0
-  enemy: {fileID: 7596215664535288965, guid: 0d04d3e00e4a35a418a6eb843995deb3, type: 3}
-  enemies: []
-  place: {x: 0, y: 0, z: 0}
   players:
   - name: Player
     life: 3
     money: 0
     prefab: {fileID: 7898336561377635808, guid: f5a17c3a2b7c96c4dba5711164f3e443, type: 3}
-    spawnpoint: []
-    camera: {fileID: 0}
+    attackSpeed: 1
+    dmg: 5
   playerObject: []
   spawnDick: []
 --- !u!4 &1457882593

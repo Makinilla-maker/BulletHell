@@ -10,7 +10,7 @@ public class Players
     public int money;
 
     public GameObject prefab;
-    public GameObject[] spawnpoint;
 
-    public Camera camera;
+    public float attackSpeed;
+    public float dmg;
 }

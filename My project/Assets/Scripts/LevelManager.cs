@@ -3,22 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 [Serializable]
+public enum Step
+{
+    NONE,
+    Step1,
+    Step2,
+    Step3,
+    Step4,
+    Step5,
+    Step6,
+    Step7,
+    Step8,
+    Step9,
+    Step10,
+    BOSS,
+}
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private float timer = 0;
-    public float delayEnemy;
-    [SerializeField] private float timeBetween = 0;
-
-
-    //Enemies
-    public GameObject enemy;
-    public List<GameObject> enemies = new List<GameObject>();
-    public Vector3 place;
-
+    public Step step;
+    public float timer = 0;
     //Players
     public Players[] players;
     public GameObject[] playerObject;
-    [SerializeField] private List<GameObject> spawnDick = new List<GameObject>();
+    public List<GameObject> spawnDick = new List<GameObject>();
 
     private void Awake()
     {
@@ -26,58 +33,36 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             if (players[i].name != "")
+            {
                 playerObject[i] = Instantiate(players[i].prefab);
-        }
+                playerObject[i].GetComponent<CharacterController2D>().dmg = players[i].dmg;
+                playerObject[i].GetComponent<CharacterController2D>().life = players[i].life;
+                playerObject[i].GetComponent<CharacterController2D>().money = players[i].money;
+                playerObject[i].GetComponent<CharacterController2D>().attackSpeed = players[i].attackSpeed;
 
-        GameObject[] a = new GameObject[4];
-        a = GameObject.FindGameObjectsWithTag("Spawnpoint");
-        for(int i = 0; i <= 3; i++)
-        {
-            Debug.Log(i);
-            spawnDick.Add(a[i]);
+            }
         }
     }
     // Start is called before the first frame update
     void Start()
     {
-       
+       step = Step.NONE;
     }
 
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
-        timeBetween += Time.deltaTime;
-        if(timeBetween > delayEnemy)
-        {
-            CreateEnemy();
-            timeBetween = 0;
-        }
-    }
-    void CreateEnemy()
-    {
-        for (int j = 0; j < playerObject.Length; j++)
-        {
-            //int i = UnityEngine.Random.Range(0, 2);
-            //Debug.Log(i);
-            //if (i == 0) place.x = (float)(playerObject[j].transform.position.x - 0.5 * Screen.width);
-            //else place.x = (float)(playerObject[j].transform.position.x + 0.5 * Screen.width);
-
-            //int x = UnityEngine.Random.Range(0, 2);
-            //Debug.Log(x);
-            //if (x == 0) place.y = (float)(playerObject[j].transform.position.y - 0.5 * Screen.height);
-            //else place.y = (float)(playerObject[j].transform.position.y + 0.5 * Screen.height);
-            //place.z = 0;
-
-            //place = Camera.main.ScreenToWorldPoint(place);
-
-
-            //enemies.Add(Instantiate(enemy,new Vector3(place.x - playerObject[j].transform.position.x, place.y - playerObject[j].transform.position.y, 0),Quaternion.identity));
-
-            int i = UnityEngine.Random.Range(0, 3);
-            Vector2 pos = new Vector2(UnityEngine.Random.Range(spawnDick[i].GetComponent<BoxCollider2D>().bounds.min.x, spawnDick[i].GetComponent<BoxCollider2D>().bounds.max.x), UnityEngine.Random.Range(spawnDick[i].GetComponent<BoxCollider2D>().bounds.min.y, spawnDick[i].GetComponent<BoxCollider2D>().bounds.max.y));
-            enemies.Add(Instantiate(enemy, pos, Quaternion.identity));
-
-        }
+        if (timer > 0 && step == Step.NONE) step = Step.Step1;
+        if (timer > 60 && step == Step.Step1) step = Step.Step2;
+        if (timer > 120 && step == Step.Step2) step = Step.Step3;
+        if (timer > 180 && step == Step.Step3) step = Step.Step4;
+        if (timer > 240 && step == Step.Step4) step = Step.Step5;
+        if (timer > 300 && step == Step.Step5) step = Step.Step6;
+        if (timer > 360 && step == Step.Step6) step = Step.Step7;
+        if (timer > 420 && step == Step.Step7) step = Step.Step8;
+        if (timer > 480 && step == Step.Step8) step = Step.Step9;
+        if (timer > 540 && step == Step.Step9) step = Step.Step10;
+        if (timer > 600 && step == Step.Step10) step = Step.BOSS;
     }
 }
