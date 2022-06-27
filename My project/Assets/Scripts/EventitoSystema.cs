@@ -15,4 +15,8 @@ public class EventitoSystema : MonoBehaviour
     {
         Application.Quit();
     }
+    public void TDM()
+    {
+        Application.OpenURL("https://twitter.com/TDMstudios3");
+    }
 }

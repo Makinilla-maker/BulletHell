@@ -7,6 +7,10 @@ TagManager:
   - Bullet
   - Enemy
   - Spawnpoint
+  - Play_base
+  - Characters_base
+  - Shop_base
+  - Characters
   layers:
   - Default
   - TransparentFX

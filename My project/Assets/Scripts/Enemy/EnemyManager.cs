@@ -25,12 +25,8 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] a = new GameObject[4];
-        a = GameObject.FindGameObjectsWithTag("Spawnpoint");
-        for (int i = 0; i <= 3; i++)
-        {
-            levelManger.spawnDick.Add(a[i]);
-        }
+        Debug.Log("????????????????????????????????");
+        levelManger = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     // Update is called once per frame
@@ -116,8 +112,11 @@ public class EnemyManager : MonoBehaviour
         {
             for(int y = 0; y < enemyCuant; y++)
             {
+                Debug.Log(levelManger.spawnDick.Count);
                 int i = UnityEngine.Random.Range(0, levelManger.spawnDick.Count);
-                Vector2 pos = new Vector2(UnityEngine.Random.Range(levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.min.x, levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.max.x), UnityEngine.Random.Range(levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.min.y, levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.max.y));
+                float a1 = UnityEngine.Random.Range(levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.min.x, levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.max.x);
+                float a2 = UnityEngine.Random.Range(levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.min.y, levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.max.y);
+                Vector2 pos = new Vector2(a1, a2);
                 enemies.Add(Instantiate(enemy[x].prefabPath, pos, Quaternion.identity));
             }           
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -19,38 +20,55 @@ public class CharacterController2D : MonoBehaviour
     public int money;
 
     public float canfire;
+
+    public LevelManager levelManager;
     void Start()
     {
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         bulletParent = GameObject.Find("Trash");
         canfire = .5f;
-        character.Initialize("Sturion",3,5,.2f);
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        if (Input.GetButton("Fire1") && Time.time > canfire)
+        if(levelManager.level != Level.BASE)
         {
-            canfire = Time.time + character.attackSpeed;
-            Vector2 direction;
-            direction = cam.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
-            GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position,Quaternion.identity, bulletParent.transform);
-            bullet.GetComponent<Rigidbody2D>().AddForce(direction.normalized * bulletForce);
-            bullet.GetComponent<Bullet>().parent = this.gameObject;
+            if (Input.GetButton("Fire1") && Time.time > canfire)
+            {
+                canfire = Time.time + character.attackSpeed;
+                Vector2 direction;
+                direction = cam.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
+                GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity, bulletParent.transform);
+                bullet.GetComponent<Rigidbody2D>().AddForce(direction.normalized * bulletForce);
+                bullet.GetComponent<Bullet>().parent = this.gameObject;
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                Vector2 direction;
+                direction = cam.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
+                GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity, bulletParent.transform);
+                bullet.GetComponent<Rigidbody2D>().AddForce(direction.normalized * bulletForce);
+                bullet.GetComponent<Bullet>().parent = this.gameObject;
+            }
         }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Vector2 direction;
-            direction = cam.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
-            GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity, bulletParent.transform);
-            bullet.GetComponent<Rigidbody2D>().AddForce(direction.normalized * bulletForce);
-            bullet.GetComponent<Bullet>().parent = this.gameObject;
-        }
-
     }
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.tag == "Play_base")
+        {
+            levelManager.NoSePorqueTengoQueHacerEsto();
+        }
+        if(collision.transform.tag == "Characters")
+        {
+            Debug.Log("aaaaaaaaaaaaa");
+            levelManager.SelectedCharacter(collision.gameObject,this.gameObject);
+        }
     }
 }

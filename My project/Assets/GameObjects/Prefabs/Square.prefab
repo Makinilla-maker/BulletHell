@@ -290,7 +290,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 24.5
+  far clip plane: 103.91
   field of view: 34
   orthographic: 1
   orthographic size: 9
@@ -478,6 +478,9 @@ MonoBehaviour:
   bulletParent: {fileID: 0}
   bulletForce: 500
   moveSpeed: 5
+  money: 0
+  canfire: 0
+  levelManager: {fileID: 0}
 --- !u!61 &435551230555872094
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -513,7 +516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4598735854532183716}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Triggers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
