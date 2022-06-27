@@ -35,10 +35,10 @@ public class LevelManager : MonoBehaviour
             if (players[i].name != "")
             {
                 playerObject[i] = Instantiate(players[i].prefab);
-                playerObject[i].GetComponent<CharacterController2D>().dmg = players[i].dmg;
-                playerObject[i].GetComponent<CharacterController2D>().life = players[i].life;
+                playerObject[i].GetComponent<CharacterController2D>().character.dmg = players[i].dmg;
+                playerObject[i].GetComponent<CharacterController2D>().character.life = players[i].life;
                 playerObject[i].GetComponent<CharacterController2D>().money = players[i].money;
-                playerObject[i].GetComponent<CharacterController2D>().attackSpeed = players[i].attackSpeed;
+                playerObject[i].GetComponent<CharacterController2D>().character.attackSpeed = players[i].attackSpeed;
 
             }
         }

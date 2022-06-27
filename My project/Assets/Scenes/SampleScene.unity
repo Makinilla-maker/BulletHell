@@ -172,6 +172,7 @@ MonoBehaviour:
   timeBetween: 0
   percentBasicEnemy: 10
   percentTankEnemy: 90
+  enemyCuant: 2
 --- !u!4 &569456961
 Transform:
   m_ObjectHideFlags: 0
