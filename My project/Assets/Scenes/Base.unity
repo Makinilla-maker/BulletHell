@@ -155,6 +155,7 @@ MonoBehaviour:
   step: 0
   level: 0
   timer: 0
+  test: {fileID: 7898336561377635808, guid: f5a17c3a2b7c96c4dba5711164f3e443, type: 3}
   selectablePlayers:
   - {fileID: 305101114}
   - {fileID: 1682272792}

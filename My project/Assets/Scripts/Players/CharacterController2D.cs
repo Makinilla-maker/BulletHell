@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -22,21 +23,30 @@ public class CharacterController2D : MonoBehaviour
     public float canfire;
 
     public LevelManager levelManager;
+    PhotonView view;
     void Start()
     {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         bulletParent = GameObject.Find("Trash");
         canfire = .5f;
         DontDestroyOnLoad(gameObject);
+        view = GetComponent<PhotonView>();
+        if(!view.IsMine)
+        {
+            cam.enabled = false;
+        }
     }
 
     void Update()
     {
-        Movement();
-        if(levelManager.level != Level.BASE)
+        if(view.IsMine)
         {
-            CheckLevel();
-            Attack();
+            Movement();
+            if(levelManager.level != Level.BASE)
+            {
+                CheckLevel();
+                Attack();
+            }            
         }
     }
     void CheckLevel()

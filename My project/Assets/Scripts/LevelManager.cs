@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 [Serializable]
 public enum Step
 {
@@ -32,6 +33,7 @@ public class LevelManager : MonoBehaviour
     public Level level;
     public float timer = 0;
     //Players
+    public GameObject test;
     public GameObject[] selectablePlayers;
     public Players[] players;
     public GameObject[] playerObject;
@@ -54,7 +56,18 @@ public class LevelManager : MonoBehaviour
         level = Level.BASE;
         playerObject = new GameObject[players.Length];
         step = Step.NONE;
-        InstatiatePlayer();
+        PhotonNetwork.Instantiate(test.name, Vector3.zero,Quaternion.identity);
+        spawnDick.Clear();
+        GameObject[] a = new GameObject[4];
+        a = GameObject.FindGameObjectsWithTag("Spawnpoint");
+        for (int i = 0; i <= 3; i++)
+        {
+            spawnDick.Add(a[i]);
+            if (level == Level.BASE)
+                spawnDick[i].SetActive(false);
+        }
+        //InstatiatePlayer();
+
     }
     public void InstatiatePlayer()
     {
