@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 305101117}
   - component: {fileID: 305101116}
   - component: {fileID: 305101118}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player 1
   m_TagString: Characters
   m_Icon: {fileID: 0}
@@ -394,11 +394,14 @@ MonoBehaviour:
   life: 3
   damage: 10
   attackspeed: 1
+  xp: 0
   character:
     name: 
     life: 0
     attackSpeed: 0
     dmg: 0
+    xp: 0
+    level: 0
 --- !u!1 &435517522
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +615,7 @@ GameObject:
   - component: {fileID: 1324248066}
   - component: {fileID: 1324248065}
   - component: {fileID: 1324248067}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Play
   m_TagString: Play_base
   m_Icon: {fileID: 0}
@@ -745,7 +748,7 @@ GameObject:
   - component: {fileID: 1682272795}
   - component: {fileID: 1682272794}
   - component: {fileID: 1682272796}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player 2
   m_TagString: Characters
   m_Icon: {fileID: 0}
@@ -861,11 +864,14 @@ MonoBehaviour:
   life: 2
   damage: 8
   attackspeed: 0.4
+  xp: 0
   character:
     name: 
     life: 0
     attackSpeed: 0
     dmg: 0
+    xp: 0
+    level: 0
 --- !u!1 &1794434945
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,7 +883,7 @@ GameObject:
   - component: {fileID: 1794434946}
   - component: {fileID: 1794434948}
   - component: {fileID: 1794434947}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Play (1)
   m_TagString: Shop_base
   m_Icon: {fileID: 0}

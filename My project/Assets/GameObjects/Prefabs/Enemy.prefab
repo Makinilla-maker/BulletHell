@@ -116,9 +116,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   live: 0
-  levelManager: {fileID: 0}
+  enemyManager: {fileID: 0}
   rb: {fileID: 0}
   player: {fileID: 0}
+  exp: {fileID: 7071380709390424179, guid: 7d10d83dbb812c84ba2415238fa9353e, type: 3}
   speed: 5
 --- !u!50 &4046328807478803560
 Rigidbody2D:

@@ -8,6 +8,7 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GameObject player;
+    public GameObject exp;
     public float speed = 85;
 
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class BasicEnemy : MonoBehaviour
     {
         if(live < 1)
         {
+            Instantiate(exp, this.gameObject.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
             enemyManager.enemies.Remove(this.gameObject);
         }

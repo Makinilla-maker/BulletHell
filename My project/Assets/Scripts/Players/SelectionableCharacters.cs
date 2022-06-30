@@ -9,10 +9,11 @@ public class SelectionableCharacters : MonoBehaviour
     public int life;
     public float damage;
     public float attackspeed;
+    public float xp;
 
     public Character character;
     private void Start()
     {
-        character.Initialize(name, life, damage, attackspeed);
+        character.Initialize(name, life, damage, attackspeed,xp, 1);
     }
 }

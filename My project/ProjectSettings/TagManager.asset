@@ -11,6 +11,7 @@ TagManager:
   - Characters_base
   - Shop_base
   - Characters
+  - XP
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Player
   - Enemy
   - Spawners
-  - 
-  - 
+  - XP
+  - NONXP
   - 
   - 
   - 
