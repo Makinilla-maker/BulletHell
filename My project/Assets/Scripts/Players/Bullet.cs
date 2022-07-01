@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     public GameObject parent;
 
     private Vector2 screenBounds;
+    public float lifeTime = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,8 @@ public class Bullet : MonoBehaviour
     {
         if(type == 0)
         {
-            if (gameObject.transform.position.x > screenBounds.x * 1.5 || gameObject.transform.position.y > screenBounds.y * 1.5 || gameObject.transform.position.x < (Camera.main.transform.position.x - screenBounds.x) * 1.5 || gameObject.transform.position.y < (Camera.main.transform.position.y - screenBounds.y) * 1.5)
+            lifeTime -= Time.deltaTime;
+            if (lifeTime < 0)
             {
                 Destroy(this.gameObject);
             }

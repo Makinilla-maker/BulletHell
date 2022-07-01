@@ -27,7 +27,6 @@ public class CharacterController2D : MonoBehaviour
     void Start()
     {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
-        bulletParent = GameObject.Find("Trash");
         canfire = .5f;
         DontDestroyOnLoad(gameObject);
         view = GetComponent<PhotonView>();
@@ -46,8 +45,14 @@ public class CharacterController2D : MonoBehaviour
             {
                 CheckLevel();
                 Attack();
-            }            
+                CheckLife();
+            }        
         }
+    }
+    void CheckLife()
+    {
+        if (character.life < 0)
+            Application.Quit();
     }
     void CheckLevel()
     {
@@ -73,7 +78,7 @@ public class CharacterController2D : MonoBehaviour
             canfire = Time.time + character.attackSpeed;
             Vector2 direction;
             direction = cam.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
-            GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity, bulletParent.transform);
+            GameObject bullet = PhotonNetwork.Instantiate(bulletPrefab.name, gameObject.transform.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody2D>().AddForce(direction.normalized * bulletForce);
             bullet.GetComponent<Bullet>().parent = this.gameObject;
         }
@@ -98,8 +103,11 @@ public class CharacterController2D : MonoBehaviour
         }
         if(collision.transform.tag == "Characters")
         {
-            Debug.Log("aaaaaaaaaaaaa");
-            levelManager.SelectedCharacter(collision.gameObject,this.gameObject);
+           levelManager.SelectedCharacter(collision.gameObject,this.gameObject);
+        }
+        if (collision.transform.tag == "Enemy")
+        {
+            character.life--;
         }
     }
 }

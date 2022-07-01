@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Photon.Pun;
 [Serializable]
 
 
@@ -117,7 +118,7 @@ public class EnemyManager : MonoBehaviour
                 float a1 = UnityEngine.Random.Range(levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.min.x, levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.max.x);
                 float a2 = UnityEngine.Random.Range(levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.min.y, levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.max.y);
                 Vector2 pos = new Vector2(a1, a2);
-                enemies.Add(Instantiate(enemy[x].prefabPath, pos, Quaternion.identity));
+                enemies.Add(PhotonNetwork.Instantiate(enemy[x].prefabPath.name, pos, Quaternion.identity));
             }           
         }
     }

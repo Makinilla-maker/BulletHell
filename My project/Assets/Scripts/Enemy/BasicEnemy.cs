@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class BasicEnemy : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class BasicEnemy : MonoBehaviour
     {
         if(live < 1)
         {
-            Instantiate(exp, this.gameObject.transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(exp.name, this.gameObject.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
             enemyManager.enemies.Remove(this.gameObject);
         }
@@ -41,7 +42,6 @@ public class BasicEnemy : MonoBehaviour
         if (other.transform.tag == "Bullet")
         {
             live -= other.GetComponent<Bullet>().parent.GetComponent<CharacterController2D>().character.dmg;
-            Debug.Log(other.GetComponent<Bullet>().parent.GetComponent<CharacterController2D>().character.dmg);
         }
     }
 }

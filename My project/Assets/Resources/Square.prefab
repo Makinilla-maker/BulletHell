@@ -576,10 +576,10 @@ MonoBehaviour:
   bulletForce: 500
   moveSpeed: 5
   character:
-    name: 
-    life: 0
-    attackSpeed: 0
-    dmg: 0
+    name: HJSDIAKDOKASKDSA
+    life: 3
+    attackSpeed: 0.5
+    dmg: 10
     xp: 0
     level: 0
   money: 0
