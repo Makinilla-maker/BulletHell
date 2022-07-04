@@ -302,12 +302,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3337812aaf8248c4e99ed3b708625265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 0}
   rb: {fileID: 7898336561377635810}
   cam: {fileID: 7898336560406292514}
   bulletPrefab: {fileID: 8847489373408851363, guid: e10ebf9daba71de42895c0427a023931, type: 3}
   bulletParent: {fileID: 7244935978362673812}
   bulletForce: 500
-  moveSpeed: 20
+  moveSpeed: 8
+  canfire: 0
+  inmortalCount: 3
   character:
     prefab: {fileID: 0}
     name: 
@@ -319,9 +322,8 @@ MonoBehaviour:
     xp: 0
     level: 0
   money: 0
-  canfire: 0
-  levelManager: {fileID: 0}
   firstTime: 0
+  state: 0
 --- !u!61 &435551230555872094
 BoxCollider2D:
   m_ObjectHideFlags: 0

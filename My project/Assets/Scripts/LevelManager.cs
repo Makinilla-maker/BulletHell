@@ -8,7 +8,6 @@ using TMPro;
 public enum Step
 {
     NONE,
-    CANTMOVE,
     ALLEY,
     Step1,
     Step2,

@@ -19,6 +19,7 @@ public class BasicEnemy : MonoBehaviour
         live = enemyManager.enemy[(int)EnemyType.BASIC].lives;
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     // Update is called once per frame
@@ -33,8 +34,12 @@ public class BasicEnemy : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Vector2 dist = player.transform.position - gameObject.transform.position;
-        rb.MovePosition(rb.position + dist.normalized * speed * Time.fixedDeltaTime);
+        Debug.Log(levelManager.playerObject.GetComponent<CharacterController2D>().state);
+        if(levelManager.playerObject.GetComponent<CharacterController2D>().state != PlayerState.CANTMOVE)
+        {
+            Vector2 dist = player.transform.position - gameObject.transform.position;
+            rb.MovePosition(rb.position + dist.normalized * speed * Time.fixedDeltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

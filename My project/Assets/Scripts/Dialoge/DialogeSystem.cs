@@ -5,27 +5,37 @@ using TMPro;
 
 public class DialogeSystem : MonoBehaviour
 {
+    public GameObject playerGO;
+    public LevelManager levelManager;
     public TMP_Text nameText;
     public TMP_Text dialogueText;
+    public Queue<string> names;
     public Queue<string> sentences;
+    public Queue<float> timeBetweenChar;
+    public Animator animator;
 
     void Start()
     {
+        names = new Queue<string>();
         sentences = new Queue<string>();
+        timeBetweenChar = new Queue<float>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
-    public void StartDialogue(Dialoge dialogue)
+    public void StartDialogue(Dialoge[] dialogue, GameObject player)
     {
-        Debug.Log("Starting conv with" + dialogue.name);
+        playerGO = player;
+        playerGO.GetComponent<CharacterController2D>().state = PlayerState.CANTMOVE;
+        animator.SetBool("IsOpen", true);
 
-        nameText.text = dialogue.name;
-
-        sentences.Clear();
-
-        foreach(string sentece in dialogue.sentences)
+        for(int i = 0; i<dialogue.Length;i++)
         {
-            sentences.Enqueue(sentece);
+            if (dialogue[i].name == "MC") dialogue[i].name = levelManager.player.name;
+            names.Enqueue(dialogue[i].name);
+            sentences.Enqueue(dialogue[i].sentences);
+            timeBetweenChar.Enqueue(dialogue[i].time);
         }
+        
         DisplayNextSentence();
     }
     public void DisplayNextSentence()
@@ -36,20 +46,24 @@ public class DialogeSystem : MonoBehaviour
             return;
         }
 
+        nameText.text = names.Dequeue();
         string sentence =  sentences.Dequeue();
-        StartCoroutine(TypeSentence(sentence));
+        float time = timeBetweenChar.Dequeue();
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence, time));
     }
-    IEnumerator TypeSentence(string sentence)
+    IEnumerator TypeSentence(string sentence, float time)
     {
         dialogueText.text = "";
         foreach(char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(0.16f);
+            yield return new WaitForSeconds(time);
         }
     }
     public void EndDialogue()
     {
-        Debug.Log("End of conversation");
+        playerGO.GetComponent<CharacterController2D>().state = PlayerState.NORMAL;
+        animator.SetBool("IsOpen", false);
     }
 }
