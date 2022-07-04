@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         timeBetween += Time.deltaTime;
-        if (timeBetween > delayEnemy)
+        if (timeBetween > delayEnemy && levelManger.step == Step.Step1)
         {
             CreateEnemy();
             timeBetween = 0;
@@ -62,41 +62,6 @@ public class EnemyManager : MonoBehaviour
                 percentBasicEnemy = 100;
                 percentTankEnemy = 100 - percentBasicEnemy;
                 break;
-            case Step.Step4:
-                delayEnemy = 3f;
-                percentBasicEnemy = 100;
-                percentTankEnemy = 100 - percentBasicEnemy;
-                break;
-            case Step.Step5:
-                delayEnemy = 2.5f;
-                percentBasicEnemy = 80;
-                percentTankEnemy = 100 - percentBasicEnemy;
-                break;
-            case Step.Step6:
-                delayEnemy = 2f;
-                percentBasicEnemy = 70;
-                percentTankEnemy = 100 - percentBasicEnemy;
-                break;
-            case Step.Step7:
-                delayEnemy = 1.5f;
-                percentBasicEnemy = 60;
-                percentTankEnemy = 100 - percentBasicEnemy;
-                break;
-            case Step.Step8:
-                delayEnemy = 1f;
-                percentBasicEnemy = 50;
-                percentTankEnemy = 100 - percentBasicEnemy;
-                break;
-            case Step.Step9:
-                delayEnemy = 1f;
-                percentBasicEnemy = 50;
-                percentTankEnemy = 100 - percentBasicEnemy;
-                break;
-            case Step.Step10:
-                delayEnemy = 1f;
-                percentBasicEnemy = 50;
-                percentTankEnemy = 100 - percentBasicEnemy;
-                break;
             default:
                 break;
         }
@@ -108,17 +73,16 @@ public class EnemyManager : MonoBehaviour
         float debug = UnityEngine.Random.value;
         if (debug < percentBasicEnemy/100) x = 0;
         else x = 1;
-        for (int j = 0; j < levelManger.playerObject.Length; j++)
+        
+        for(int y = 0; y < enemyCuant; y++)
         {
-            for(int y = 0; y < enemyCuant; y++)
-            {
-                Debug.Log(levelManger.spawnDick.Count);
-                int i = UnityEngine.Random.Range(0, levelManger.spawnDick.Count);
-                float a1 = UnityEngine.Random.Range(levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.min.x, levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.max.x);
-                float a2 = UnityEngine.Random.Range(levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.min.y, levelManger.spawnDick[i].GetComponent<BoxCollider2D>().bounds.max.y);
-                Vector2 pos = new Vector2(a1, a2);
-                enemies.Add(Instantiate(enemy[x].prefabPath, pos, Quaternion.identity));
-            }           
-        }
+            Debug.Log(levelManger.spawners.Length);
+            int i = UnityEngine.Random.Range(0, levelManger.spawners.Length);
+            float a1 = UnityEngine.Random.Range(levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.min.x, levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.max.x);
+            float a2 = UnityEngine.Random.Range(levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.min.y, levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.max.y);
+            Vector2 pos = new Vector2(a1, a2);
+            enemies.Add(Instantiate(enemy[x].prefabPath, pos, Quaternion.identity));
+        }           
+        
     }
 }

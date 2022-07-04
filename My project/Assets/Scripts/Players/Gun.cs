@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sturion : MonoBehaviour
+public class Gun : MonoBehaviour
 {
     public string name;
     public int life;
@@ -12,7 +12,7 @@ public class Sturion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        name = "Sturion";
+        name = "Gun";
         life = 3;
         attackSpeed = .5f;
         canfire = .5f;

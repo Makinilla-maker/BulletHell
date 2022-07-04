@@ -10,8 +10,10 @@ TagManager:
   - Play_base
   - Characters_base
   - Shop_base
-  - Characters
   - XP
+  - Weapons
+  - Spawners
+  - Dialogue
   layers:
   - Default
   - TransparentFX
@@ -24,8 +26,8 @@ TagManager:
   - Spawners
   - XP
   - NONXP
-  - 
-  - 
+  - Weapon
+  - Dialogue
   - 
   - 
   - 

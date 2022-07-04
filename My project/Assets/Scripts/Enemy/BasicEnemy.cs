@@ -10,6 +10,7 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] private GameObject player;
     public GameObject exp;
     public float speed = 85;
+    public LevelManager levelManager;
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +26,9 @@ public class BasicEnemy : MonoBehaviour
     {
         if(live < 1)
         {
-            Instantiate(exp, this.gameObject.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
             enemyManager.enemies.Remove(this.gameObject);
+            if(levelManager.level != Level.LVL1)    Instantiate(exp, this.gameObject.transform.position, Quaternion.identity);
         }
     }
     void FixedUpdate()
@@ -40,8 +41,8 @@ public class BasicEnemy : MonoBehaviour
     {
         if (other.transform.tag == "Bullet")
         {
-            live -= other.GetComponent<Bullet>().parent.GetComponent<CharacterController2D>().character.dmg;
-            Debug.Log(other.GetComponent<Bullet>().parent.GetComponent<CharacterController2D>().character.dmg);
+            live -= other.GetComponent<Bullet>().parent.GetComponent<CharacterController2D>().character.weapon.dmg;
+            Debug.Log(other.GetComponent<Bullet>().parent.GetComponent<CharacterController2D>().character.weapon.dmg);
         }
     }
 }

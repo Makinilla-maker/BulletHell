@@ -7,21 +7,15 @@ public class Bullet : MonoBehaviour
     public int type;
 
     public GameObject parent;
-
-    private Vector2 screenBounds;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-    }
+    public float timer = 0;
 
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
         if(type == 0)
         {
-            if (gameObject.transform.position.x > screenBounds.x * 1.5 || gameObject.transform.position.y > screenBounds.y * 1.5 || gameObject.transform.position.x < (Camera.main.transform.position.x - screenBounds.x) * 1.5 || gameObject.transform.position.y < (Camera.main.transform.position.y - screenBounds.y) * 1.5)
+            if (timer > 5)
             {
                 Destroy(this.gameObject);
             }

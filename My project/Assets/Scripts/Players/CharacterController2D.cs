@@ -16,27 +16,33 @@ public class CharacterController2D : MonoBehaviour
     public float bulletForce = 5f;
     public float moveSpeed = 5f;
 
-    public Character character = new Character();
+    public Character character;
     public int money;
 
     public float canfire;
 
     public LevelManager levelManager;
+    public bool firstTime;
     void Start()
     {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        character = levelManager.player;
         bulletParent = GameObject.Find("Trash");
         canfire = .5f;
         DontDestroyOnLoad(gameObject);
+        if (levelManager.level == Level.LVL1 && levelManager.step == Step.ALLEY) firstTime = true;
     }
 
     void Update()
     {
-        Movement();
-        if(levelManager.level != Level.BASE)
+        if(levelManager.step != Step.CANTMOVE)
         {
-            CheckLevel();
-            Attack();
+            Movement();
+            if(levelManager.level != Level.BASE && !firstTime)
+            {
+                //CheckLevel();
+                Attack();
+            }
         }
     }
     void CheckLevel()
@@ -60,7 +66,7 @@ public class CharacterController2D : MonoBehaviour
     {
         if (Input.GetButton("Fire1") && Time.time > canfire)
         {
-            canfire = Time.time + character.attackSpeed;
+            canfire = Time.time + character.weapon.attackSpeed;
             Vector2 direction;
             direction = cam.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
             GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity, bulletParent.transform);
@@ -84,12 +90,12 @@ public class CharacterController2D : MonoBehaviour
     {
         if (collision.transform.tag == "Play_base")
         {
-            levelManager.NoSePorqueTengoQueHacerEsto();
+           // levelManager.NoSePorqueTengoQueHacerEsto();
         }
-        if(collision.transform.tag == "Characters")
+        if(collision.transform.tag == "Weapons")
         {
-            Debug.Log("aaaaaaaaaaaaa");
-            levelManager.SelectedCharacter(collision.gameObject,this.gameObject);
+            levelManager.NewWeapon(collision.gameObject,this.gameObject);
+            Destroy(collision.gameObject);
         }
     }
 }

@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+using TMPro;
 [Serializable]
 public enum Step
 {
     NONE,
+    CANTMOVE,
+    ALLEY,
     Step1,
     Step2,
     Step3,
-    Step4,
-    Step5,
-    Step6,
-    Step7,
-    Step8,
-    Step9,
-    Step10,
     BOSS,
 }
 public enum Level
 {
+    NONE,
     BASE,
     LVL1,
 }
@@ -32,10 +29,10 @@ public class LevelManager : MonoBehaviour
     public Level level;
     public float timer = 0;
     //Players
-    public GameObject[] selectablePlayers;
-    public Players[] players;
-    public GameObject[] playerObject;
-    public List<GameObject> spawnDick = new List<GameObject>();
+    public GameObject[] selectableWeapons;
+    public Character player;
+    public GameObject playerObject;
+    public GameObject[] spawners;
 
     private void Awake()
     {
@@ -51,57 +48,28 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        level = Level.BASE;
-        playerObject = new GameObject[players.Length];
-        step = Step.NONE;
-        InstatiatePlayer();
+        level = Level.LVL1;
+        step = Step.ALLEY;
+        GetSpawners();
     }
     public void InstatiatePlayer()
-    {
-        Array.Clear(playerObject, 0, playerObject.Length);
-        for (int i = 0; i < players.Length; i++)
-        {
-            if (players[i].name != "")
-            {
-                playerObject[i] = Instantiate(players[i].prefab);
-            }
-        }
-        spawnDick.Clear();
-        GameObject[] a = new GameObject[4];
-        a = GameObject.FindGameObjectsWithTag("Spawnpoint");
-        for (int i = 0; i <= 3; i++)
-        {
-            spawnDick.Add(a[i]);
-            if (level == Level.BASE)
-                spawnDick[i].SetActive(false);
-        }
+    {        
+        playerObject = Instantiate(player.prefab);         
     }
 
-    public void SetCharacterStats()
+    public void NewWeapon(GameObject ch, GameObject player)
     {
-        for (int i = 0; i < players.Length; i++)
-        {
-            playerObject[i].GetComponent<CharacterController2D>().character.dmg = players[i].dmg;
-            playerObject[i].GetComponent<CharacterController2D>().character.life = players[i].life;
-            playerObject[i].GetComponent<CharacterController2D>().money = players[i].money;
-            playerObject[i].GetComponent<CharacterController2D>().character.attackSpeed = players[i].attackSpeed;
-        }
+        player.GetComponent<CharacterController2D>().character.weapon = ch.GetComponent<WeaponsGeneral>().weapon;
+        player.GetComponent<CharacterController2D>().firstTime = false;
+        
     }
-    public void SelectedCharacter(GameObject ch, GameObject player)
+
+    public void GetSpawners()
     {
-        Debug.Log(selectablePlayers.Length);
-        for(int i = 0; i < selectablePlayers.Length; i++)
-        {
-            if (selectablePlayers[i] == ch)
-            {
-                selectablePlayers[i].SetActive(false);
-                player.GetComponent<CharacterController2D>().character = selectablePlayers[i].GetComponent<SelectionableCharacters>().character;
-            }
-            else
-            {
-                selectablePlayers[i].SetActive(true);
-            }
-        }
+        GameObject[] a;
+        a = GameObject.FindGameObjectsWithTag("Spawners");
+        Debug.Log(a.Length);
+        spawners = a;
     }
 
     // Update is called once per frame
@@ -110,33 +78,22 @@ public class LevelManager : MonoBehaviour
         timer += Time.deltaTime;
         if(level != Level.BASE)
         {
-            if (timer > 0 && step == Step.NONE) step = Step.Step1;
-            if (timer > 60 && step == Step.Step1) step = Step.Step2;
-            if (timer > 120 && step == Step.Step2) step = Step.Step3;
-            if (timer > 180 && step == Step.Step3) step = Step.Step4;
-            if (timer > 240 && step == Step.Step4) step = Step.Step5;
-            if (timer > 300 && step == Step.Step5) step = Step.Step6;
-            if (timer > 360 && step == Step.Step6) step = Step.Step7;
-            if (timer > 420 && step == Step.Step7) step = Step.Step8;
-            if (timer > 480 && step == Step.Step8) step = Step.Step9;
-            if (timer > 540 && step == Step.Step9) step = Step.Step10;
-            if (timer > 600 && step == Step.Step10) step = Step.BOSS;
+            ChangeState();            
         }        
     }
-    public IEnumerator SceneChanger()
+    void ChangeState()
+    {
+        //if (timer > 0 && step == Step.NONE) step = Step.Step1;
+        //if (timer > 60 && step == Step.Step1) step = Step.Step2;
+        //if (timer > 120 && step == Step.Step2) step = Step.Step3;
+    }
+    public IEnumerator SceneChanger(string sceneName, Level l)
     {
         timer = 0;
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(sceneName);
         yield return new WaitForSeconds(0.16f);
-        level = Level.LVL1;
-        for (int i = 0; i < playerObject.Length; i++)
-        {
-            playerObject[i].transform.position = Vector3.zero;
-            playerObject[i].GetComponent<CharacterController2D>().bulletParent = GameObject.Find("Trash");
-        }
-    }
-    public void NoSePorqueTengoQueHacerEsto()
-    {
-        StartCoroutine(SceneChanger());
+        level = l;        
+        playerObject.transform.position = Vector3.zero;
+        GetSpawners();
     }
 }
