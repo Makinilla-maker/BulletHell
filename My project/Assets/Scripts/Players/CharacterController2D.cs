@@ -77,7 +77,7 @@ public class CharacterController2D : MonoBehaviour
         if (inmortalCount < 0)
         {
             state = PlayerState.NORMAL;
-            inmortalCount = 3;
+            inmortalCount = 1;
         }
     }
     void CheckLevel()

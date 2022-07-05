@@ -8,10 +8,17 @@ public class FirstWeapon : MonoBehaviour
     public GameObject enemy;
     public GameObject canvas;
     bool a;
+    CharacterController2D characterController;
+    
 
     private void Update()
     {
-        if (a && Input.GetMouseButtonDown(0)) Destroy(gameObject);
+        if (a && Input.GetMouseButtonDown(0))
+        {
+            characterController.state = PlayerState.NORMAL;
+            Destroy(canvas);
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,9 +27,11 @@ public class FirstWeapon : MonoBehaviour
         {
             Debug.Log("adasdasdasdasdasdad");
             Instantiate(enemy, spawn.position, Quaternion.identity);
-            GameObject.Find("LevelManager").GetComponent<LevelManager>().playerObject.GetComponent<CharacterController2D>().state = PlayerState.CANTMOVE;
+            characterController = GameObject.Find("LevelManager").GetComponent<LevelManager>().playerObject.GetComponent<CharacterController2D>();
+            characterController.state = PlayerState.CANTMOVE;
             canvas.SetActive(true);
             a = true;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 }
