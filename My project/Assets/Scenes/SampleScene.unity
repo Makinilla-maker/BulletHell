@@ -1159,7 +1159,7 @@ MonoBehaviour:
   enemies: []
   place: {x: 0, y: 0, z: 0}
   levelManger: {fileID: 0}
-  delayEnemy: 5
+  delayEnemy: 10
   timeBetween: 0
   percentBasicEnemy: 10
   percentTankEnemy: 90
@@ -1969,14 +1969,14 @@ MonoBehaviour:
   dialogue:
   - name: MC
     time: 0.16
-    sentences: What the hell was that?
+    sentences: /*What the hell was that?*/0.00
   - name: MC
     time: 0
     sentences: Why did my family just disappear with a holy hymn on them?
   - name: MC
     time: 0
-    sentences: Fck, I-I'll j-just to move with WASD, I don't even know what that
-      meeans but i've a hunch.
+    sentences: F-Fuck,OK, keep calm. I-I'll j-just to move with WASD, I don't even
+      know what that meeans but i've a hunch.
 --- !u!61 &879099779
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3562,10 +3562,12 @@ MonoBehaviour:
   name: Guns
   attackSpeed: 1
   damage: 15
+  shootShoot: {fileID: 8300000, guid: 038da30ea4ec94f4fa06b96ff7a12258, type: 3}
   weapon:
     name: 
     attackSpeed: 0
     dmg: 0
+    shootNoise: {fileID: 0}
 --- !u!61 &1364373591
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3607,6 +3609,7 @@ MonoBehaviour:
   spawn: {fileID: 1961385474}
   enemy: {fileID: 7596215664535288965, guid: 0d04d3e00e4a35a418a6eb843995deb3, type: 3}
   canvas: {fileID: 1722896892}
+  audiosPick: {fileID: 0}
 --- !u!1 &1375163518
 GameObject:
   m_ObjectHideFlags: 0
@@ -5719,6 +5722,7 @@ MonoBehaviour:
       name: None
       attackSpeed: 1000
       dmg: 0
+      shootNoise: {fileID: 0}
     xp: 0
     level: 0
   playerObject: {fileID: 0}

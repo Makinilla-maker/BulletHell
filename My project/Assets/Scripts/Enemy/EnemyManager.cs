@@ -45,25 +45,25 @@ public class EnemyManager : MonoBehaviour
     {
         switch(levelManger.step)
         {
-            case 0:
-                break;
-            case Step.Step1:
-                delayEnemy = 5;
-                percentBasicEnemy = 100;
-                percentTankEnemy = 100 - percentBasicEnemy;
-                break;
-            case Step.Step2:
-                delayEnemy = 4;
-                percentBasicEnemy = 100;
-                percentTankEnemy = 100 - percentBasicEnemy;
-                break;
-            case Step.Step3:
-                delayEnemy = 3.5f;
-                percentBasicEnemy = 100;
-                percentTankEnemy = 100 - percentBasicEnemy;
-                break;
-            default:
-                break;
+            //case 0:
+            //    break;
+            //case Step.Step1:
+            //    delayEnemy = 10;
+            //    percentBasicEnemy = 100;
+            //    percentTankEnemy = 100 - percentBasicEnemy;
+            //    break;
+            //case Step.Step2:
+            //    delayEnemy = ;
+            //    percentBasicEnemy = 100;
+            //    percentTankEnemy = 100 - percentBasicEnemy;
+            //    break;
+            //case Step.Step3:
+            //    delayEnemy = 3.5f;
+            //    percentBasicEnemy = 100;
+            //    percentTankEnemy = 100 - percentBasicEnemy;
+            //    break;
+            //default:
+            //    break;
         }
     }
 

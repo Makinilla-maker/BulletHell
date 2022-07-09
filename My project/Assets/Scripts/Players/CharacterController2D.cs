@@ -16,6 +16,8 @@ public class CharacterController2D : MonoBehaviour
     public LevelManager levelManager;
     public Rigidbody2D rb;
     public Camera cam;
+    public AudioSource audioSource;
+    public AudioClip clipStep;
 
     Vector2 movement;
     
@@ -44,6 +46,7 @@ public class CharacterController2D : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         state = PlayerState.NORMAL;
         if (levelManager.level == Level.LVL1 && levelManager.step == Step.ALLEY) firstTime = true;
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -102,6 +105,8 @@ public class CharacterController2D : MonoBehaviour
     {
         if (Input.GetButton("Fire1") && Time.time > canfire)
         {
+            audioSource.clip = character.weapon.shootNoise;
+            audioSource.Play();
             state = PlayerState.ISSHOOTING;
             canfire = Time.time + character.weapon.attackSpeed;
             Vector2 direction;
@@ -109,15 +114,7 @@ public class CharacterController2D : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity, bulletParent.transform);
             bullet.GetComponent<Rigidbody2D>().AddForce(direction.normalized * bulletForce);
             bullet.GetComponent<Bullet>().parent = this.gameObject;
-            whileshooting = 3;
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            Vector2 direction;
-            direction = cam.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
-            GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity, bulletParent.transform);
-            bullet.GetComponent<Rigidbody2D>().AddForce(direction.normalized * bulletForce);
-            bullet.GetComponent<Bullet>().parent = this.gameObject;
+            whileshooting = 1;
         }
         if(state == PlayerState.ISSHOOTING)
         {
@@ -134,6 +131,11 @@ public class CharacterController2D : MonoBehaviour
         else if (state == PlayerState.ISSHOOTING)
         {
             rb.MovePosition(rb.position + movement * moveSpeed/2 * Time.fixedDeltaTime);
+        }
+        if(rb.velocity != Vector2.zero)
+        {
+            audioSource.clip = clipStep;
+            audioSource.Play();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

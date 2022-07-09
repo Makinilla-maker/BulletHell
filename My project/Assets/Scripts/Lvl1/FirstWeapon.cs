@@ -7,9 +7,9 @@ public class FirstWeapon : MonoBehaviour
     public Transform spawn;
     public GameObject enemy;
     public GameObject canvas;
+    public AudioClip audiosPick;
     bool a;
     CharacterController2D characterController;
-    
 
     private void Update()
     {

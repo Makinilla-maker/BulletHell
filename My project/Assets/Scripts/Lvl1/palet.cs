@@ -14,6 +14,7 @@ public class palet : MonoBehaviour
         if(collision.transform.tag == "Bullet")
         {
             life--;
+            Destroy(collision.gameObject);
         }
     }
 }
