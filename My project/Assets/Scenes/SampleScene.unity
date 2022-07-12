@@ -1968,15 +1968,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
   - name: MC
-    time: 0.16
-    sentences: /*What the hell was that?*/0.00
-  - name: MC
+    type: 1
+    a: 0
+    dialogeEvent:
+      m_PersistentCalls:
+        m_Calls: []
     time: 0
-    sentences: Why did my family just disappear with a holy hymn on them?
-  - name: MC
+    sentences: dsadadasdsdasdasdasdasdasdasdasdasda
+  - name: Kuro
+    type: 3
+    a: 0
+    dialogeEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2619409936895040585}
+          m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+          m_MethodName: SceneChanger
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Base
+            m_BoolArgument: 0
+          m_CallState: 2
     time: 0
-    sentences: F-Fuck,OK, keep calm. I-I'll j-just to move with WASD, I don't even
-      know what that meeans but i've a hunch.
+    sentences: let's goooooooo
 --- !u!61 &879099779
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2878,7 +2896,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1098355237
 MonoBehaviour:
@@ -2897,6 +2915,7 @@ MonoBehaviour:
   nameText: {fileID: 1661341965}
   dialogueText: {fileID: 749464055}
   animator: {fileID: 542573179}
+  triggerToErrase: {fileID: 0}
 --- !u!1 &1121600620
 GameObject:
   m_ObjectHideFlags: 0
@@ -2998,7 +3017,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174953950
 GameObject:
@@ -3302,7 +3321,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1249159436
 GameObject:
@@ -3734,40 +3753,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - name: ?????
-    time: 0.2
-    sentences: Hahahahahahahhaha pero que tenemos por aqui?
-  - name: ?????
-    time: 0
-    sentences: Who are you?
-  - name: ?????
-    time: 0
-    sentences: Wait there and I'll come to you.
-  - name: Devil
-    time: 0
-    sentences: Hi, I'm the Devil and I....
   - name: MC
+    type: 0
+    a: 0
+    dialogeEvent:
+      m_PersistentCalls:
+        m_Calls: []
     time: 0
-    sentences: Shut the fuck up, what the fuck is going on, where is my family and
-      why the fuck is your voice so deep and echoey?
-  - name: Devil
-    time: 0
-    sentences: Didn't you hear me you morron? I'm the fucking Devil, of course I
-      have this prominent voice. Anyway I've come to make you a deal.
+    sentences: Me muerooooo. Wait espera, como es que sigo vivo.
   - name: MC
+    type: 4
+    a: 0
+    dialogeEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2619409936895040585}
+          m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+          m_MethodName: SceneChanger
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Base
+            m_BoolArgument: 0
+          m_CallState: 2
     time: 0
-    sentences: As a Christian myself, you should know that I am not very comfortable
-      making deals with the antichrist. The only Lord I have and I prey to is God.
-  - name: Devil
-    time: 0
-    sentences: Well, your lover doesn't seem to be very satisfied with you since
-      he hasn't taken you with him.
-  - name: Devil
-    time: 0
-    sentences: Are you familiar with the term...
-  - name: Devil
-    time: 0.1
-    sentences: '"the end of the world"?'
+    sentences: Bueno me salto los dialogos porque no me los se aun hehe
 --- !u!114 &1406788524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5471,7 +5484,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2003228967
 GameObject:
@@ -5849,7 +5862,7 @@ Transform:
   - {fileID: 1615320469}
   - {fileID: 1174953951}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8707878020776589723
 GameObject:

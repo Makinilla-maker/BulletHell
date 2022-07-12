@@ -25,7 +25,6 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("????????????????????????????????");
         levelManger = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
@@ -76,7 +75,6 @@ public class EnemyManager : MonoBehaviour
         
         for(int y = 0; y < enemyCuant; y++)
         {
-            Debug.Log(levelManger.spawners.Length);
             int i = UnityEngine.Random.Range(0, levelManger.spawners.Length);
             float a1 = UnityEngine.Random.Range(levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.min.x, levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.max.x);
             float a2 = UnityEngine.Random.Range(levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.min.y, levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.max.y);

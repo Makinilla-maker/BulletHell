@@ -19,6 +19,7 @@ public enum Level
     NONE,
     BASE,
     LVL1,
+    LVL2,
 }
 public class LevelManager : MonoBehaviour
 {
@@ -35,7 +36,6 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("MECAGOENDIOS");
         if (instance != null)
             Destroy(gameObject);
         else
@@ -67,7 +67,6 @@ public class LevelManager : MonoBehaviour
     {
         GameObject[] a;
         a = GameObject.FindGameObjectsWithTag("Spawners");
-        Debug.Log(a.Length);
         spawners = a;
     }
 
@@ -86,7 +85,30 @@ public class LevelManager : MonoBehaviour
         //if (timer > 60 && step == Step.Step1) step = Step.Step2;
         //if (timer > 120 && step == Step.Step2) step = Step.Step3;
     }
-    public IEnumerator SceneChanger(string sceneName, Level l)
+    public void SceneChanger(int sceneInt)
+    {
+        string sceneName;
+        switch(sceneInt)
+        {
+            case 0:
+                sceneName = "Base";
+                level = Level.BASE;
+                break;
+            case 1:
+                sceneName = "Level1";
+                level= Level.LVL1;
+                break;
+            case 2:
+                sceneName = "Level2";
+                level = Level.LVL2;
+                break;
+            default:
+                sceneName = "";
+                break;
+        }
+        StartCoroutine(SceneChangerCorrutine(sceneName,Level.BASE));
+    }
+    public IEnumerator SceneChangerCorrutine(string sceneName, Level l)
     {
         timer = 0;
         SceneManager.LoadScene(sceneName);

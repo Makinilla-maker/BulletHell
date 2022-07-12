@@ -307,7 +307,7 @@ MonoBehaviour:
   rb: {fileID: 7898336561377635810}
   cam: {fileID: 7898336560406292514}
   audioSource: {fileID: 0}
-  clipStep: {fileID: 8300000, guid: 038da30ea4ec94f4fa06b96ff7a12258, type: 3}
+  clipStep: {fileID: 8300000, guid: 438f743374572844f9e9aa7c564ed782, type: 3}
   bulletPrefab: {fileID: 8847489373408851363, guid: e10ebf9daba71de42895c0427a023931, type: 3}
   bulletParent: {fileID: 7244935978362673812}
   bulletForce: 500

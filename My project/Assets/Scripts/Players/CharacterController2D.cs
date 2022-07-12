@@ -35,7 +35,9 @@ public class CharacterController2D : MonoBehaviour
     public int money;
 
     public bool firstTime;
+    public bool isMoving;
     public PlayerState state;
+    public int level;
 
     void Start()
     {
@@ -51,7 +53,12 @@ public class CharacterController2D : MonoBehaviour
 
     void Update()
     {
-        if(state != PlayerState.CANTMOVE)
+        if (Input.GetKey(KeyCode.P))
+        {
+            SceneManager.LoadScene("Base");
+            levelManager.level = Level.BASE;
+        }
+        if (state != PlayerState.CANTMOVE)
         {
             Movement();
             if(levelManager.level != Level.BASE && !firstTime && state != PlayerState.RELOADING)
@@ -64,6 +71,7 @@ public class CharacterController2D : MonoBehaviour
         {
             movement.x = 0;
             movement.y = 0;
+            audioSource.Stop();
         }
         if(state == PlayerState.HITED)
         {
@@ -100,6 +108,15 @@ public class CharacterController2D : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         movement.Normalize();
+
+        if (movement != Vector2.zero)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
     }
     void Attack()
     {
@@ -116,11 +133,12 @@ public class CharacterController2D : MonoBehaviour
             bullet.GetComponent<Bullet>().parent = this.gameObject;
             whileshooting = 1;
         }
-        if(state == PlayerState.ISSHOOTING)
+        if (state == PlayerState.ISSHOOTING)
         {
             whileshooting -= Time.deltaTime;
-            if(whileshooting <0)    state = PlayerState.NORMAL;
+            if (whileshooting < 0) state = PlayerState.NORMAL;
         }
+        
     }
     void FixedUpdate()
     {
@@ -132,17 +150,20 @@ public class CharacterController2D : MonoBehaviour
         {
             rb.MovePosition(rb.position + movement * moveSpeed/2 * Time.fixedDeltaTime);
         }
-        if(rb.velocity != Vector2.zero)
+        if(isMoving)
         {
-            audioSource.clip = clipStep;
-            audioSource.Play();
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = clipStep;
+                audioSource.Play();
+            }                
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag == "Play_base")
         {
-           // levelManager.NoSePorqueTengoQueHacerEsto();
+            SceneManager.LoadScene("Level" + level);
         }
         if(collision.transform.tag == "Weapons")
         {

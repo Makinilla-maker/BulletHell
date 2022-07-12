@@ -34,7 +34,6 @@ public class BasicEnemy : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log(levelManager.playerObject.GetComponent<CharacterController2D>().state);
         if(levelManager.playerObject.GetComponent<CharacterController2D>().state != PlayerState.CANTMOVE)
         {
             Vector2 dist = player.transform.position - gameObject.transform.position;
@@ -47,7 +46,6 @@ public class BasicEnemy : MonoBehaviour
         if (other.transform.tag == "Bullet")
         {
             live -= other.GetComponent<Bullet>().parent.GetComponent<CharacterController2D>().character.weapon.dmg;
-            Debug.Log(other.GetComponent<Bullet>().parent.GetComponent<CharacterController2D>().character.weapon.dmg);
         }
     }
 }

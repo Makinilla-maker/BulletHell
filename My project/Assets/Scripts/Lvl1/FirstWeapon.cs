@@ -25,7 +25,6 @@ public class FirstWeapon : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("adasdasdasdasdasdad");
             Instantiate(enemy, spawn.position, Quaternion.identity);
             characterController = GameObject.Find("LevelManager").GetComponent<LevelManager>().playerObject.GetComponent<CharacterController2D>();
             characterController.state = PlayerState.CANTMOVE;
