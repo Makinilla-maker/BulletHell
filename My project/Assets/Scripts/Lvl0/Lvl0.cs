@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lvl1 : MonoBehaviour
+public class Lvl0 : MonoBehaviour
 {
     public LevelManager levelManager;
     public Collider2D[] colliders;

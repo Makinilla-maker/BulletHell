@@ -18,6 +18,7 @@ public enum Level
 {
     NONE,
     BASE,
+    LVL0,
     LVL1,
     LVL2,
 }
@@ -47,7 +48,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        level = Level.LVL1;
+        level = Level.LVL0;
         step = Step.ALLEY;
         GetSpawners();
     }
@@ -116,5 +117,6 @@ public class LevelManager : MonoBehaviour
         level = l;        
         playerObject.transform.position = Vector3.zero;
         GetSpawners();
+        playerObject.GetComponent<CharacterController2D>().state = PlayerState.NORMAL;
     }
 }

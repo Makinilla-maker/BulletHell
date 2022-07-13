@@ -4778,7 +4778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-  - name: Shoper
+  - name: Shopper
     type: 0
     a: 0
     dialogeEvent:
@@ -4786,7 +4786,7 @@ MonoBehaviour:
         m_Calls: []
     time: 0
     sentences: Hola
-  - name: Shoper
+  - name: Shopper
     type: 4
     a: 0
     dialogeEvent:
@@ -4819,6 +4819,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7508d0e16233841bef87d559428ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 0}
+  character: {fileID: 0}
   allweapons:
   - {fileID: 305101114}
   - {fileID: 1682272792}
@@ -4847,6 +4849,7 @@ MonoBehaviour:
   - {fileID: 1979096580}
   - {fileID: 1578308056}
   - {fileID: 518301569}
+  goldCostDmg: 0
   attackSpeed:
   - {fileID: 1575201431}
   - {fileID: 2089260922}
@@ -4863,6 +4866,7 @@ MonoBehaviour:
   - {fileID: 1967185975}
   - {fileID: 745373770}
   - {fileID: 353930075}
+  goldCostAS: 0
   reloadTime:
   - {fileID: 111668583}
   - {fileID: 1825976872}
@@ -4879,6 +4883,7 @@ MonoBehaviour:
   - {fileID: 2120326630}
   - {fileID: 1198063850}
   - {fileID: 980405300}
+  goldCostRT: 0
 --- !u!1 &1794477364
 GameObject:
   m_ObjectHideFlags: 0
@@ -4962,7 +4967,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1794477367}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1794434950}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: SetNewWeapon
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Shotgun
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1794477367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6206,7 +6223,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2097463261}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1794434950}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: SetNewWeapon
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Gun
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2097463261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6900,7 +6929,7 @@ RectTransform:
   m_GameObject: {fileID: 8407437599061233368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.4305344, y: 2.4305344, z: 2.4305344}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8407437599066710419}
@@ -6912,7 +6941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -138.5}
+  m_AnchoredPosition: {x: -14.22, y: -335}
   m_SizeDelta: {x: 747.6324, y: 140.09021}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8407437599066710416
@@ -7447,10 +7476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

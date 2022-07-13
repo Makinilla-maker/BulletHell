@@ -10,7 +10,7 @@ public class FadeInFadeOut : MonoBehaviour
     void Start()
     {
         Debug.Log(FindObjectOfType<LevelManager>().level);
-        if(FindObjectOfType<LevelManager>().level != Level.LVL1)
+        if(FindObjectOfType<LevelManager>().level != Level.LVL0)
         {
             animator.SetTrigger("trans");
         }

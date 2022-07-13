@@ -29,7 +29,7 @@ public class BasicEnemy : MonoBehaviour
         {
             Destroy(this.gameObject);
             enemyManager.enemies.Remove(this.gameObject);
-            if(levelManager.level != Level.LVL1)    Instantiate(exp, this.gameObject.transform.position, Quaternion.identity);
+            if(levelManager.level != Level.LVL0)    Instantiate(exp, this.gameObject.transform.position, Quaternion.identity);
         }
     }
     void FixedUpdate()

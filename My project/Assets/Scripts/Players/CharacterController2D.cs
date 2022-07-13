@@ -47,8 +47,9 @@ public class CharacterController2D : MonoBehaviour
         canfire = .5f;
         DontDestroyOnLoad(gameObject);
         state = PlayerState.NORMAL;
-        if (levelManager.level == Level.LVL1 && levelManager.step == Step.ALLEY) firstTime = true;
+        if (levelManager.level == Level.LVL0 && levelManager.step == Step.ALLEY) firstTime = true;
         audioSource = gameObject.GetComponent<AudioSource>();
+        level = 1;
     }
 
     void Update()
@@ -165,10 +166,14 @@ public class CharacterController2D : MonoBehaviour
         {
             SceneManager.LoadScene("Level" + level);
         }
-        if(collision.transform.tag == "Weapons")
+        if (collision.transform.tag == "Shop_base")
+        {
+            state = PlayerState.CANTMOVE;
+        }
+        if (collision.transform.tag == "Weapons")
         {
             levelManager.NewWeapon(collision.gameObject,this.gameObject);
-            if(levelManager.level != Level.LVL1)    
+            if(levelManager.level != Level.LVL0)    
                 Destroy(collision.gameObject);
         }
         if(collision.transform.tag == "Enemy")

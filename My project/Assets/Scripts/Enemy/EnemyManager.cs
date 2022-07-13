@@ -12,7 +12,7 @@ public class EnemyManager : MonoBehaviour
     public List<GameObject> enemies = new List<GameObject>();
     public Vector3 place;
 
-    public LevelManager levelManger;
+    public LevelManager levelManager;
 
     public float delayEnemy;
     [SerializeField] private float timeBetween = 0;
@@ -25,14 +25,14 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelManger = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         timeBetween += Time.deltaTime;
-        if (timeBetween > delayEnemy && levelManger.step == Step.Step1)
+        if (timeBetween > delayEnemy && levelManager.step == Step.Step1)
         {
             CreateEnemy();
             timeBetween = 0;
@@ -42,7 +42,7 @@ public class EnemyManager : MonoBehaviour
 
     void StateMachine()
     {
-        switch(levelManger.step)
+        switch(levelManager.step)
         {
             //case 0:
             //    break;
@@ -75,9 +75,9 @@ public class EnemyManager : MonoBehaviour
         
         for(int y = 0; y < enemyCuant; y++)
         {
-            int i = UnityEngine.Random.Range(0, levelManger.spawners.Length);
-            float a1 = UnityEngine.Random.Range(levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.min.x, levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.max.x);
-            float a2 = UnityEngine.Random.Range(levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.min.y, levelManger.spawners[i].GetComponent<BoxCollider2D>().bounds.max.y);
+            int i = UnityEngine.Random.Range(0, levelManager.spawners.Length);
+            float a1 = UnityEngine.Random.Range(levelManager.spawners[i].GetComponent<BoxCollider2D>().bounds.min.x, levelManager.spawners[i].GetComponent<BoxCollider2D>().bounds.max.x);
+            float a2 = UnityEngine.Random.Range(levelManager.spawners[i].GetComponent<BoxCollider2D>().bounds.min.y, levelManager.spawners[i].GetComponent<BoxCollider2D>().bounds.max.y);
             Vector2 pos = new Vector2(a1, a2);
             enemies.Add(Instantiate(enemy[x].prefabPath, pos, Quaternion.identity));
         }           
