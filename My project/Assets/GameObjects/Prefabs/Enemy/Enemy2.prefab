@@ -103,7 +103,7 @@ MonoBehaviour:
   enemyManager: {fileID: 0}
   rb: {fileID: 0}
   player: {fileID: 0}
-  exp: {fileID: 0}
+  exp: {fileID: 7071380709390424179, guid: 7d10d83dbb812c84ba2415238fa9353e, type: 3}
   speed: 2
   levelManager: {fileID: 0}
 --- !u!50 &-4182549107395589885

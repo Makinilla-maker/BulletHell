@@ -20,6 +20,30 @@ public class EventitoSystema : MonoBehaviour
         SceneManager.LoadScene(sceneGame);
     }
 
+    public void LoadGame()
+    {
+        SaveData data = SaveSystem.LoadData();
+        if (data != null)
+        {
+            StartCoroutine(LoadGameIterator(data));
+        }
+    }
+    IEnumerator LoadGameIterator(SaveData data)
+    {
+        trans.SetTrigger("trans");
+        SetPlayer(data);
+        yield return new WaitForSeconds(transitionTime);
+        Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        SceneManager.LoadScene("Base");
+        Debug.Log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+        levelManager.InstatiatePlayer();
+        Debug.Log("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+    }
+    public void SetPlayer(SaveData data)
+    {
+        levelManager.player = data.character;
+    }
+
     public void QuitGame()
     {
         Application.Quit();

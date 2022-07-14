@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+[System.Serializable]
 
 public class ButtonNameClickhihi : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class ButtonNameClickhihi : MonoBehaviour
     public GameObject canvasTutorial;
     public bool a = false;
     public DialogeSystem sentences;
+    private void Start()
+    {
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+    }
 
     private void Update()
     {
@@ -34,7 +39,9 @@ public class ButtonNameClickhihi : MonoBehaviour
         Destroy(canvas);
         animator.SetTrigger("trans");
         levelManager.InstatiatePlayer();
+        levelManager.GetSpawners();
         StartCoroutine(aa());
+        //SaveSystem.SaveData(levelManager.player);
     }
     IEnumerator aa()
     {

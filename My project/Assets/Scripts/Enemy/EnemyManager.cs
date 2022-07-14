@@ -15,7 +15,7 @@ public class EnemyManager : MonoBehaviour
     public LevelManager levelManager;
 
     public float delayEnemy;
-    [SerializeField] private float timeBetween = 0;
+    [SerializeField] private float timeBetween;
 
     public float percentBasicEnemy;
     public float percentTankEnemy;
@@ -26,6 +26,7 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        timeBetween = delayEnemy;
     }
 
     // Update is called once per frame
@@ -78,7 +79,7 @@ public class EnemyManager : MonoBehaviour
             int i = UnityEngine.Random.Range(0, levelManager.spawners.Length);
             float a1 = UnityEngine.Random.Range(levelManager.spawners[i].GetComponent<BoxCollider2D>().bounds.min.x, levelManager.spawners[i].GetComponent<BoxCollider2D>().bounds.max.x);
             float a2 = UnityEngine.Random.Range(levelManager.spawners[i].GetComponent<BoxCollider2D>().bounds.min.y, levelManager.spawners[i].GetComponent<BoxCollider2D>().bounds.max.y);
-            Vector2 pos = new Vector2(a1, a2);
+            Vector3 pos = new Vector3(a1, a2,-0.2f);
             enemies.Add(Instantiate(enemy[x].prefabPath, pos, Quaternion.identity));
         }           
         

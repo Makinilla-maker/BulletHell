@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.SceneManagement;
 using TMPro;
-[Serializable]
+[System.Serializable]
 public enum Step
 {
     NONE,
@@ -50,7 +49,6 @@ public class LevelManager : MonoBehaviour
     {
         level = Level.LVL0;
         step = Step.ALLEY;
-        GetSpawners();
     }
     public void InstatiatePlayer()
     {        
@@ -94,20 +92,26 @@ public class LevelManager : MonoBehaviour
             case 0:
                 sceneName = "Base";
                 level = Level.BASE;
+                step = Step.Step1;
+                Debug.Log("BASE");
                 break;
             case 1:
                 sceneName = "Level1";
-                level= Level.LVL1;
+                level = Level.LVL1;
+                step = Step.Step1;
+                Debug.Log("LVL1");
                 break;
             case 2:
                 sceneName = "Level2";
                 level = Level.LVL2;
+                step = Step.Step1;
+                Debug.Log("LVL2");
                 break;
             default:
                 sceneName = "";
                 break;
         }
-        StartCoroutine(SceneChangerCorrutine(sceneName,Level.BASE));
+        StartCoroutine(SceneChangerCorrutine(sceneName,level));
     }
     public IEnumerator SceneChangerCorrutine(string sceneName, Level l)
     {

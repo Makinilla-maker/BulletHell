@@ -11,6 +11,7 @@ public enum PlayerState
     RELOADING,
     HITED,
 }
+[System.Serializable]
 public class CharacterController2D : MonoBehaviour
 {
     public LevelManager levelManager;
@@ -31,25 +32,37 @@ public class CharacterController2D : MonoBehaviour
     public float whileshooting = 1;
 
     public Character character;
-
-    public int money;
+    
 
     public bool firstTime;
     public bool isMoving;
     public PlayerState state;
     public int level;
 
+    public CharacterController2D (CharacterController2D player)
+    {
+        cam = player.cam;
+        audioSource = player.audioSource;
+        clipStep = player.clipStep;
+        movement = player.movement;
+        canfire = player.canfire;
+        inmortalCount = player.inmortalCount;
+        bulletForce = player.bulletForce;
+        bulletParent = player.bulletParent;
+        bulletPrefab = player.bulletPrefab;
+
+    }
     void Start()
     {
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         character = levelManager.player;
-        bulletParent = GameObject.Find("Trash");
         canfire = .5f;
         DontDestroyOnLoad(gameObject);
         state = PlayerState.NORMAL;
         if (levelManager.level == Level.LVL0 && levelManager.step == Step.ALLEY) firstTime = true;
         audioSource = gameObject.GetComponent<AudioSource>();
         level = 1;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -58,13 +71,14 @@ public class CharacterController2D : MonoBehaviour
         {
             SceneManager.LoadScene("Base");
             levelManager.level = Level.BASE;
+            firstTime = false;
         }
         if (state != PlayerState.CANTMOVE)
         {
             Movement();
             if(levelManager.level != Level.BASE && !firstTime && state != PlayerState.RELOADING)
             {
-                //CheckLevel();
+                CheckLevel();
                 Attack();
             }
         }
@@ -95,7 +109,7 @@ public class CharacterController2D : MonoBehaviour
     void CheckLevel()
     {
         float xpReferencia;
-        xpReferencia = (float)((6/5 * Mathf.Pow(character.level, 3)) - (15 * Mathf.Pow(character.level,2)) + (100 * character.level) - 140);
+        xpReferencia = (float)(character.level/0.009);
         Debug.Log(character.level);
         Debug.Log(xpReferencia);
         if (character.xp > xpReferencia)
@@ -126,7 +140,7 @@ public class CharacterController2D : MonoBehaviour
             audioSource.clip = character.weapon.shootNoise;
             audioSource.Play();
             state = PlayerState.ISSHOOTING;
-            canfire = Time.time + character.weapon.attackSpeed;
+            canfire = Time.time + (1/character.weapon.attackSpeed);
             Vector2 direction;
             direction = cam.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
             GameObject bullet = Instantiate(bulletPrefab, gameObject.transform.position, Quaternion.identity, bulletParent.transform);
@@ -164,7 +178,7 @@ public class CharacterController2D : MonoBehaviour
     {
         if (collision.transform.tag == "Play_base")
         {
-            SceneManager.LoadScene("Level" + level);
+            levelManager.SceneChanger(level);
         }
         if (collision.transform.tag == "Shop_base")
         {

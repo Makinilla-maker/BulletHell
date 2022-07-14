@@ -84,9 +84,9 @@ public class Shop : MonoBehaviour
     }
     public void AddDmg()
     {
-        if(character.money >= goldCostDmg)
+        if(character.character.money >= goldCostDmg)
         {
-            character.money -= goldCostDmg;
+            character.character.money -= goldCostDmg;
             selectedWeapon.GetComponent<WeaponsGeneral>().weapon.dmg += 5;
         }
         UpdateStats();

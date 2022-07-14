@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-[Serializable]
+[System.Serializable]
 
 public class Character
 {
@@ -13,12 +12,17 @@ public class Character
     public Weapon weapon;
     public float xp;
     public int level;
+    public int money;
+    public int weaponsUnlocked;
 
-    public void Initialize(string n, int l, float x, int lvl)
-    {
-        name = n;
-        life = l;
-        xp = x;
-        level = lvl;
-    }
+
+    //public void Initialize(string n, int l, float x, int lvl,int m,int w)
+    //{
+    //    name = n;
+    //    life = l;
+    //    xp = x;
+    //    level = lvl;
+    //    money = m;
+    //    weaponsUnlocked = w;
+    //}
 }
