@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         timeBetween += Time.deltaTime;
-        if (timeBetween > delayEnemy && levelManager.step == Step.Step1)
+        if (timeBetween > delayEnemy && levelManager.step == Step.Step1 && levelManager.playerObject.GetComponent<CharacterController2D>().state != PlayerState.SHOP)
         {
             CreateEnemy();
             timeBetween = 0;

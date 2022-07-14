@@ -34,7 +34,7 @@ public class BasicEnemy : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(levelManager.playerObject.GetComponent<CharacterController2D>().state != PlayerState.CANTMOVE)
+        if(levelManager.playerObject.GetComponent<CharacterController2D>().state != PlayerState.CANTMOVE && levelManager.playerObject.GetComponent<CharacterController2D>().state != PlayerState.SHOP)
         {
             Vector2 dist = player.transform.position - gameObject.transform.position;
             rb.MovePosition(rb.position + dist.normalized * speed * Time.fixedDeltaTime);
