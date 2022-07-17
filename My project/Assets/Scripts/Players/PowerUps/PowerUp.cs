@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public enum TypePowerUp
 {
@@ -8,7 +9,7 @@ public enum TypePowerUp
     TWOSHOOT,
     THREESHOOT,
     FOURSHOOT,
-    PIRCING,
+    PIERCING,
     DAMAGE,
 }
 [System.Serializable]

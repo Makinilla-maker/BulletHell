@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Enemy")
+        if (collision.transform.tag == "Enemy" && !parent.GetComponent<CharacterController2D>().isPiercing)
             Destroy(gameObject);
     }
 }

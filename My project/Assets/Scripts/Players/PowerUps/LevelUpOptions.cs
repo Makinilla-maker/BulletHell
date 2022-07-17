@@ -18,13 +18,13 @@ public class LevelUpOptions : MonoBehaviour
 
     public void Update()
     {
-        if(levelManager.playerObject.GetComponent<CharacterController2D>().state == PlayerState.SHOP && !activated)
+        if(levelManager.playerObject.GetComponent<CharacterController2D>().isShopping && !activated)
         {
             UI.SetActive(true);
             SetPowerUps();
             activated = true;
         }
-        if(levelManager.playerObject.GetComponent<CharacterController2D>().state != PlayerState.SHOP)
+        if(!levelManager.playerObject.GetComponent<CharacterController2D>().isShopping)
         {
             activated = false;
         }
@@ -34,8 +34,16 @@ public class LevelUpOptions : MonoBehaviour
     {
         for(int i = 0; i < butons.Length; i++)
         {
-            int x = Random.Range(0,powersUps.Length);
-            butons[i].GetComponent<ButtonPowerUp>().powerUp = powersUps[x];
+            bool bulean = false;
+            while (!bulean)
+            {
+                int a = Random.Range(0, powersUps.Length);
+                if (!powersUps[a].isPicked)
+                {
+                    bulean = true;
+                    butons[i].GetComponent<ButtonPowerUp>().powerUp = powersUps[a];
+                }
+            }
         }
     }
 }

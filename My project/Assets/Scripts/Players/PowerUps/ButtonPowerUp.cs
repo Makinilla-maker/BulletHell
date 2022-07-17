@@ -1,16 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using TMPro;
 
-public class ButtonPowerUp : MonoBehaviour
+public class ButtonPowerUp : MonoBehaviour, IPointerEnterHandler
 {
     public PowerUp powerUp;
     public CharacterController2D player;
     public GameObject canvas;
+    public TMP_Text text;
 
     private void Start()
     {
         player = GameObject.Find("LevelManager").GetComponent<LevelManager>().playerObject.GetComponent<CharacterController2D>();
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        text.text = powerUp.description;
     }
 
     public void UsePowerUp()
@@ -29,12 +37,15 @@ public class ButtonPowerUp : MonoBehaviour
                 break;
             case TypePowerUp.FOURSHOOT:
                 break;
-            case TypePowerUp.PIRCING:
+            case TypePowerUp.PIERCING:
+                player.isPiercing = true;
                 break;
             default:
                 break;
         }
+        powerUp.isPicked = true;
         canvas.SetActive(false);
         player.state = PlayerState.NORMAL;
+        player.isShopping = false;
     }
 }

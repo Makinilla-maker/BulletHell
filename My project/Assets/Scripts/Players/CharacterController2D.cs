@@ -10,7 +10,6 @@ public enum PlayerState
     ISSHOOTING,
     RELOADING,
     HITED,
-    SHOP,
 }
 [System.Serializable]
 public class CharacterController2D : MonoBehaviour
@@ -37,6 +36,8 @@ public class CharacterController2D : MonoBehaviour
 
     public bool firstTime;
     public bool isMoving;
+    public bool isShopping;
+    public bool isPiercing;
     public PlayerState state;
     public int level;
 
@@ -74,7 +75,7 @@ public class CharacterController2D : MonoBehaviour
             levelManager.level = Level.BASE;
             firstTime = false;
         }
-        if (state != PlayerState.CANTMOVE && state != PlayerState.SHOP)
+        if (state != PlayerState.CANTMOVE && !isShopping)
         {
             Movement();
             if(levelManager.level != Level.BASE && !firstTime && state != PlayerState.RELOADING)
@@ -114,7 +115,7 @@ public class CharacterController2D : MonoBehaviour
         if (character.xp > xpReferencia)
         {
             state = PlayerState.CANTMOVE;
-            state = PlayerState.SHOP;
+            isShopping = true;
             character.xp = 0;
             character.level++;
         }
