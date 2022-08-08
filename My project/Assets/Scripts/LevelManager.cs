@@ -27,7 +27,9 @@ public class LevelManager : MonoBehaviour
 
     public Step step;
     public Level level;
-    public float timer = 0;
+    public TMP_Text text;
+    public bool isTimer;
+    public float timer = 900;
     //Players
     public GameObject[] selectableWeapons;
     public Character player;
@@ -49,6 +51,7 @@ public class LevelManager : MonoBehaviour
     {
         level = Level.LVL0;
         step = Step.ALLEY;
+        isTimer = false;
     }
     public void InstatiatePlayer()
     {        
@@ -72,11 +75,33 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if(level != Level.BASE)
+        if(timer > 0)
+            timer -= Time.deltaTime;
+        else 
+            timer = 0;
+        if (level != Level.BASE)
         {
             ChangeState();            
-        }        
+        }
+        if(!isTimer)
+        {
+            if(GameObject.Find("Timer"))
+            {
+                text = GameObject.Find("Timer").gameObject.GetComponent<TMP_Text>();
+                isTimer = true;
+            }
+        }
+        else if(isTimer)
+        {
+            DisplayTimer();
+        }
+    }
+    public void DisplayTimer()
+    {
+        float minutes = Mathf.FloorToInt(timer / 60);
+        float seconds = Mathf.FloorToInt(timer % 60);
+
+        text.text = string.Format("{0:00}:{1:00}", minutes,seconds);
     }
     void ChangeState()
     {
@@ -115,7 +140,7 @@ public class LevelManager : MonoBehaviour
     }
     public IEnumerator SceneChangerCorrutine(string sceneName, Level l)
     {
-        timer = 0;
+        timer = 900;
         SceneManager.LoadScene(sceneName);
         yield return new WaitForSeconds(0.16f);
         level = l;        
